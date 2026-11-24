@@ -1,0 +1,16 @@
+{
+  "allowed_input_directories": ["/absolute/path/to/data"],
+  "output_directory": "/absolute/path/to/kumo-output",
+  "enabled_backends": ["tabular", "relational", "forecast", "anomaly", "engine"],
+  "backend_python": {},
+  "device": "auto",
+  "max_concurrent_jobs": 1,
+  "max_queued_jobs": 32,
+  "idle_unload_seconds": 300,
+  "job_timeout_seconds": 3600,
+  "max_input_bytes": 100000000,
+  "max_rows": 200000,
+  "max_preview_rows": 10,
+  "disclosure": {"column_names": false, "summaries": false, "sample_values": false},
+  "automatic_model_downloads": false
+}

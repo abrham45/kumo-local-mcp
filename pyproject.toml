@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kumo-local-mcp"
+version = "0.1.0"
+description = "Privacy-controlled local MCP access to NVIDIA Kumo"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["mcp", "kumo", "local-inference", "tabular", "forecasting", "anomaly-detection"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = ["mcp>=1.20,<2", "pandas>=2.2,<4", "pydantic>=2.10,<3", "filelock>=3.16,<5"]
+
+[project.urls]
+Homepage = "https://github.com/abrham45/kumo-local-mcp"
+Repository = "https://github.com/abrham45/kumo-local-mcp"
+Issues = "https://github.com/abrham45/kumo-local-mcp/issues"
+
+[project.optional-dependencies]
+sdm = ["structured-data-models==0.3.0", "scikit-learn>=1.5", "safetensors>=0.5"]
+engine = ["kumo-engine==1.0.1", "pyarrow>=15"]
+dev = ["pytest>=8,<10", "build>=1,<2", "ruff>=0.9,<1", "twine>=6,<7"]
+
+[project.scripts]
+kumo-local-mcp = "kumo_local_mcp.cli:main"
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["kumo_local_mcp*"]
+namespaces = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: downloads and runs real Kumo models"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

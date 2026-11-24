@@ -1,0 +1,4 @@
+**
+!Dockerfile.engine
+!scripts/
+!scripts/engine_cpu_wheel.py

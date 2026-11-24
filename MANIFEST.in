@@ -1,0 +1,24 @@
+include LICENSE README.md CHANGELOG.md VALIDATION.md CONTRIBUTING.md
+include Dockerfile.engine .dockerignore .gitattributes
+recursive-include docs *.md
+include scripts/engine_cpu_wheel.py
+include examples/config.example.json examples/context.csv examples/query.csv
+include examples/smoke_models.py examples/verify_workflows.py
+recursive-include tests *.py
+
+# Defense in depth: local configuration and execution artifacts never ship.
+exclude config.json mcp-client.json setup-report.json .env .env.* .pypirc .netrc
+prune .venv
+prune environments
+prune kumo-output
+prune validation
+prune build
+prune dist
+prune .github
+prune .git
+prune .pytest_cache
+prune .ruff_cache
+global-exclude __pycache__ *.py[cod] *.so *.dylib *.dll .DS_Store *.log *.tmp
+global-exclude *.pt *.pth *.ckpt *.safetensors *.onnx *.bin *.whl
+global-exclude *.parquet *.arrow *.npy *.npz *.sqlite *.sqlite3 *.db
+global-exclude *.pem *.key *.p12 *.pfx

@@ -1,0 +1,11 @@
+FROM --platform=linux/amd64 python:3.12-slim
+COPY scripts/engine_cpu_wheel.py /tmp/engine_cpu_wheel.py
+RUN pip install --no-cache-dir 'torch==2.14.1+cpu' --index-url https://download.pytorch.org/whl/cpu \
+    && pip download --no-deps --dest /tmp/upstream 'kumo-engine==1.0.1' \
+    && python /tmp/engine_cpu_wheel.py /tmp/upstream/*.whl /tmp/cpu \
+    && pip install --no-cache-dir /tmp/cpu/*.whl 'pydantic>=2.11,<3' \
+    && pip check \
+    && rm -rf /tmp/upstream /tmp/cpu
+# The MCP launcher mounts only its worker package and output directory at runtime.
+# No model endpoint or hosted infrastructure is used.
+CMD ["python", "-m", "kumo_local_mcp.worker"]
